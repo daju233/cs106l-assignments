@@ -20,6 +20,12 @@ std::ostream& operator<<(std::ostream& os, const Course& course);
  * @param delim The delimiter to split by.
  * @returns     A vector of the split strings.
  */
+/**
+* 通过分隔符分割字符串并返回分割字符串的向量。
+* @param s 要分割的字符串。
+* @param delim 要分割的分隔符。
+* @returns 分割字符串的向量。
+*/
 std::vector<std::string> split(const std::string& s, char delim) {
   std::vector<std::string> return_vec;
   std::stringstream ss(s);
