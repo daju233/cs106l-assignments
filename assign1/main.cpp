@@ -153,7 +153,7 @@ void write_courses_offered(std::vector<Course> &all_courses) {
     for(Course trash:trashs){
       delete_elem_from_vector(all_courses,trash);
   }
-      std::cout<<all_courses.size()<<std::endl;
+      // std::cout<<all_courses.size()<<std::endl;
 }
 
 /**
@@ -184,7 +184,7 @@ void write_courses_offered(std::vector<Course> &all_courses) {
 */
 void write_courses_not_offered(std::vector<Course> &unlisted_courses) {
   /* (STUDENT TODO) Your code goes here... */
-  std::cout<<unlisted_courses.size()<<std::endl;
+  // std::cout<<unlisted_courses.size()<<std::endl;
   std::ofstream ofs("/home/maxwell/Documents/cs106l-assignments/assign1/student_output/courses_not_offered.csv");
   ofs<<"Title,Number of Units,Quarter"<<'\n';
   for(Course& result:unlisted_courses){
@@ -199,7 +199,7 @@ int main() {
 
   std::vector<Course> courses;
   parse_csv("courses.csv", courses);
-  std::cout<<"测试"<<courses.size()<<std::endl;
+  // std::cout<<"测试"<<courses.size()<<std::endl;
 
   /* Uncomment for debugging... */
   // print_courses(courses);
