@@ -76,15 +76,12 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
   std::queue<const std::string*> queue;
   std::stringstream test(name);
   std::string str1,str2;
+  test>>str1>>str2;
 
-    test>>str1>>str2;
-    // std::cout<<str1[0]<<str2[0]<<std::endl;
   for(const auto& s:students){
     std::stringstream test2(s);
-
     std::string str3,str4;
     test2>>str3>>str4;
-
     if(str1[0]==str3[0]&&str2[0]==str4[0]) queue.push(&s);
     test.clear();
   }

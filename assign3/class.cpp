@@ -25,7 +25,7 @@ template <typename T, typename U, typename K> void myClass<T, U, K>::setHealth(U
   this->health = value;
 }
 template <typename T, typename U, typename K> void myClass<T, U, K>::setMana(K value) {
-  r this->mana = value;
+  this->mana = value;
 }
 
 template <typename T, typename U, typename K> void myClass<T, U, K>::addMana() { this->mana++; }

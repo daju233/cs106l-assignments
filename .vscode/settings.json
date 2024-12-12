@@ -78,6 +78,11 @@
     "semaphore": "cpp",
     "stop_token": "cpp",
     "thread": "cpp",
-    "__nullptr": "cpp"
+    "__nullptr": "cpp",
+    "map": "cpp",
+    "shared_mutex": "cpp",
+    "cfenv": "cpp",
+    "cinttypes": "cpp",
+    "filesystem": "cpp"
   }
 }

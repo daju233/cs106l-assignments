@@ -8,9 +8,9 @@ private:
 public:
   myClass(T wealth, U health, K mana) {}
   myClass() {}
-  T getWealth() const { return this->wealth; }
-  U getHealth() const { return this->health; }
-  K getMana() const { return this->mana; }
+  T getWealth() const {}
+  U getHealth() const {}
+  K getMana() const {}
   void setWealth(T value) {}
   void setHealth(U value) {}
   void setMana(K value) {}
