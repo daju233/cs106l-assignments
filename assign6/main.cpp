@@ -53,7 +53,7 @@ public:
     auto it = std::find_if(courses.begin(), courses.end(),
                            [&course_title](Course x) { return x.title == course_title; });
     if(it!=courses.end()){
-      return *it;
+      return std::make_optional<Course>(*it);
     }
     return std::nullopt;
     // throw std::runtime_error("find_course not implemented");
