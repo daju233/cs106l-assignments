@@ -10,6 +10,7 @@
  */
 template <typename T> class unique_ptr {
 private:
+  T* ptr;
   /* STUDENT TODO: What data must a unique_ptr keep track of? */
 
 public:
@@ -18,24 +19,24 @@ public:
    * @param ptr The pointer to manage.
    * @note You should avoid using this constructor directly and instead use `make_unique()`.
    */
-  unique_ptr(T* ptr) {
+  unique_ptr(T* ptr) : ptr(ptr) {
     /* STUDENT TODO: Implement the constructor */
-    throw std::runtime_error("Not implemented: unique_ptr(T* ptr)");
+    // throw std::runtime_error("Not implemented: unique_ptr(T* ptr)");
   }
 
   /**
    * @brief Constructs a new `unique_ptr` from `nullptr`.
    */
-  unique_ptr(std::nullptr_t) {
+  unique_ptr(std::nullptr_t) : ptr(nullptr) {
     /* STUDENT TODO: Implement the nullptr constructor */
-    throw std::runtime_error("Not implemented: unique_ptr(std::nullptr_t)");
+    // throw std::runtime_error("Not implemented: unique_ptr(std::nullptr_t)");
   }
 
   /**
    * @brief Constructs an empty `unique_ptr`.
    * @note By default, a `unique_ptr` points to `nullptr`.
    */
-  unique_ptr() : unique_ptr(nullptr) {}
+  unique_ptr() : ptr(nullptr) {}
 
   /**
    * @brief Dereferences a `unique_ptr` and returns a reference to the object.
@@ -43,7 +44,8 @@ public:
    */
   T& operator*() {
     /* STUDENT TODO: Implement the dereference operator */
-    throw std::runtime_error("Not implemented: operator*()");
+    return *ptr;
+    // throw std::runtime_error("Not implemented: operator*()");
   }
 
   /**
@@ -51,8 +53,10 @@ public:
    * @return A const reference to the object.
    */
   const T& operator*() const {
+    const T& e = *ptr;
     /* STUDENT TODO: Implement the dereference operator (const) */
-    throw std::runtime_error("Not implemented: operator*() const");
+    return e;
+    // throw std::runtime_error("Not implemented: operator*() const");
   }
 
   /**
@@ -62,7 +66,8 @@ public:
    */
   T* operator->() {
     /* STUDENT TODO: Implement the arrow operator */
-    throw std::runtime_error("Not implemented: operator->()");
+    return ptr;
+    // throw std::runtime_error("Not implemented: operator->()");
   }
 
   /**
@@ -72,7 +77,9 @@ public:
    */
   const T* operator->() const {
     /* STUDENT TODO: Implement the arrow operator */
-    throw std::runtime_error("Not implemented: operator->() const");
+    const T* e = ptr;
+    return e;
+    // throw std::runtime_error("Not implemented: operator->() const");
   }
 
   /**
@@ -82,7 +89,8 @@ public:
    */
   operator bool() const {
     /* STUDENT TODO: Implement the boolean conversion operator */
-    throw std::runtime_error("Not implemented: operator bool() const");
+    return ptr == nullptr ? false : true;
+    // throw std::runtime_error("Not implemented: operator bool() const");
   }
 
   /** STUDENT TODO: In the space below, do the following:
@@ -92,6 +100,33 @@ public:
    * - Implement the move constructor
    * - Implement the move assignment operator
    */
+  ~unique_ptr() {
+    if (this->ptr != nullptr)
+      delete ptr;
+  }
+  unique_ptr(unique_ptr&& other) {
+    //接管other的ptr
+    this->ptr = other.ptr;
+    other.ptr = nullptr;
+  }
+  //移动赋值
+  unique_ptr& operator=(unique_ptr&& other) {
+    //避免自我赋值
+    if (this != &other) {
+      delete ptr;
+      this->ptr = other.ptr;
+      other.ptr = nullptr;
+    }
+    return *this;
+  }
+
+  // 在你提供的 unique_ptr
+  // 的移动构造函数和移动赋值运算符的实现中，潜在的内存泄漏问题出现在移动赋值运算符 (operator=) 中。
+  // 具体来说，如果你不释放当前对象持有的资源（即 this->ptr 指向的内存），那么当你将 other.ptr
+  // 赋值给 this->ptr 时， 原来的 this->ptr
+  // 指向的内存将被泄露，因为它不再有任何指针指向它，并且没有被显式删除。
+  unique_ptr(const unique_ptr& other) = delete;
+  unique_ptr& operator=(const unique_ptr& other) = delete;
 };
 
 /**

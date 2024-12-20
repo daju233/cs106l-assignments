@@ -52,7 +52,24 @@ template <typename T> struct ListNode {
  */
 template <typename T> unique_ptr<ListNode<T>> create_list(const std::vector<T>& values) {
   /* STUDENT TODO: Implement this method */
-  throw std::runtime_error("Not implemented: createList");
+  unique_ptr<ListNode<T>> head = nullptr;
+  //auto it = values.rbegin();it!=values.rend();it++ gpt建议的写法
+  int size = values.size()-1;
+  for(int i=size;i>=0;i--){
+    unique_ptr<ListNode<T>> node = make_unique<ListNode<T>>(values[i]);
+    //记得要用移动语义
+    //将head的值转变为右值 赋值给next
+    //head的自己值 转变为右值node
+    (*node).next=std::move(head);
+    //此时head是nullptr node.next是head(旧的值)
+    head = std::move(node);
+    //此时node是nullptr,head是node
+    // head = node;
+    //b->a head是b的所有权，head.next是a的所有权，head.next.next是nullptr
+    //取走的是所有权，留下一个空指针给你
+  }
+  return head;
+  // throw std::runtime_error("Not implemented: createList");
 }
 
 /**
